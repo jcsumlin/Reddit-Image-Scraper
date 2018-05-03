@@ -14,7 +14,10 @@ reddit = praw.Reddit(client_id='',
                      username='')
 
 print("Account logged in: ", reddit.user.me())
-SUBREDDIT = "all"
+SUBREDDIT = "python"
+word1 = ""
+word2 = ""
+flair = ""
 
 
 if not os.path.isfile("already_fetched.txt"):
@@ -25,11 +28,11 @@ else:
        already_fetched = already_fetched.split("\n")
        already_fetched = list(filter(None, already_fetched))
        
-def image_fetch(already_fetched):
+def image_fetch(already_fetched, flair, word1, word2):
     subreddit = reddit.subreddit(SUBREDDIT)
     posts = subreddit.new(limit=500)
     for submission in posts:
-        if submission.link_flair_text == 'Flair Text' and ("word1" in submission.title.lower() and "word2" in submission.title.lower()) and submission.id not in already_fetched:
+        if submission.link_flair_text == flair and (word1 in submission.title.lower() and word2 in submission.title.lower()) and submission.id not in already_fetched:
             print(submission.title)
             url = submission.url
 #            pic = re.search('(i.redd.it)\W(\w{1,}.jpg)', url).group(2)
@@ -38,9 +41,9 @@ def image_fetch(already_fetched):
             f.close()                
 #            submission.upvote()
             already_fetched.append(submission.id)
-try:
-    image_fetch(already_fetched)
-except KeyboardInterrupt:
     with open("already_fetched.txt", "w") as f:
         for x in already_fetched:
             f.write(x + "\n")
+
+image_fetch(already_fetched, flair, word1, word2)
+    

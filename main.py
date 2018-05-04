@@ -35,8 +35,8 @@ else:
        
 def image_fetch(already_fetched, flair, filter_words):
     subreddit = reddit.subreddit(SUBREDDIT)
-    posts = subreddit.new(limit=LIMIT)
-    for submission in posts:
+    new_posts = subreddit.new(limit=LIMIT)
+    for submission in new_posts:
         if submission.link_flair_text == flair and (filter_word_check(filter_words, submission.title)) and submission.id not in already_fetched:
             url = submission.url
             try:

@@ -1,14 +1,8 @@
 # Reddit Image Scraper
 
 ## Install instructions.
-Replace the following with your reddit API information.
-```
-reddit = praw.Reddit(client_id='',
-                     client_secret='',
-                     password='',
-                     user_agent='Image fetcher by J_C___',
-                     username='')
-```
+Edit the auth.ini.example file to contain your credentials and save it as auth.ini
+
 ## IMPORTANT VARIABLES:
 ```
 SUBREDDIT = "python"
